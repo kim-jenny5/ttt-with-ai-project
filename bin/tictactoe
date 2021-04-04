@@ -1,3 +1,29 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello! You are now playing 'Tic-Tac-Toe!'"
+game = Game.new
+until game.over?
+    game.play
+end
+
+def play_again
+    if game.over?
+        puts "Would you like to play again? Type 'y' for yes or 'n' for no."
+        input = gets.strip
+        if input == "y"
+            game = Game.new
+            until game.over?
+                game.play
+            end
+        elsif input == "n"
+            puts "Thank you. See you later!"
+        else
+            puts "I'm sorry. Please type 'y' or 'n'."
+            until input == "y" || input == "n"
+                play_again
+            end
+        end
+    end
+end
